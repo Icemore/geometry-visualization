@@ -7,6 +7,7 @@ void drawer_impl::clear()
 {
     point_buffers.clear();
     segment_buffers.clear();
+    triangle_buffers.clear();
 }
 
 void drawer_impl::set_color(QColor const & c)
@@ -58,6 +59,27 @@ void drawer_impl::draw_point(point_type const & pt, uint8 radius)
     colors_buffer.push_back(current_color_.redF());
     colors_buffer.push_back(current_color_.greenF());
     colors_buffer.push_back(current_color_.blueF());
+}
+
+void drawer_impl::draw_filled_triangle(triangle_type const & triangle)
+{
+    if(triangle_buffers.empty())
+    {
+        triangle_buffers.push_back(triangle_buffer_t());
+    }
+
+    std::vector<GLint> & points_buffer = triangle_buffers.back().triangles;
+    std::vector<GLdouble> & colors_buffer = triangle_buffers.back().colors;
+
+    for(point_type const & pt : triangle.pts)
+    {
+        points_buffer.push_back(pt.x);
+        points_buffer.push_back(pt.y);
+
+        colors_buffer.push_back(current_color_.redF());
+        colors_buffer.push_back(current_color_.greenF());
+        colors_buffer.push_back(current_color_.blueF());
+    }
 }
 
 }

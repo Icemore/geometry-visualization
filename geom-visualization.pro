@@ -45,6 +45,7 @@ HEADERS += src/stdafx.h \
            headers/geom/primitives/rectangle.h \
            headers/geom/primitives/segment.h \
            headers/geom/primitives/vector.h \
+           headers/geom/primitives/triangle.h \
 
 SOURCES += src/io/primitives.cpp \
            src/visualization/drawer_impl.cpp \

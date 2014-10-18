@@ -87,17 +87,15 @@ void main_window_t::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    for (drawer_impl::point_buffer_t const & buffer : drawer_.point_buffers)
+    for (drawer_impl::triangle_buffer_t const & buffer : drawer_.triangle_buffers)
     {
-        glPointSize(buffer.radius);
-
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
-        
-        glVertexPointer (2, GL_INT, 0, &buffer.points[0]);
+
+        glVertexPointer (2, GL_INT, 0, &buffer.triangles[0]);
         glColorPointer  (3, GL_DOUBLE, 0, &buffer.colors[0]);
 
-        glDrawArrays(GL_POINTS, 0, buffer.points.size() / 2);
+        glDrawArrays(GL_TRIANGLES, 0, buffer.triangles.size() / 2);
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
@@ -114,7 +112,23 @@ void main_window_t::paintGL()
         glColorPointer  (3, GL_DOUBLE, 0, &buffer.colors[0]);
 
         glDrawArrays(GL_LINES, 0, buffer.segments.size() / 2);
+
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
+    }
+
+    for (drawer_impl::point_buffer_t const & buffer : drawer_.point_buffers)
+    {
+        glPointSize(buffer.radius);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
         
+        glVertexPointer (2, GL_INT, 0, &buffer.points[0]);
+        glColorPointer  (3, GL_DOUBLE, 0, &buffer.colors[0]);
+
+        glDrawArrays(GL_POINTS, 0, buffer.points.size() / 2);
+
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
     }

@@ -34,4 +34,11 @@ namespace visualization
         }
         while (it != beg);
     }
+
+    void draw(drawer_type & drawer, geom::structures::triangle_type const & triangle)
+    {
+        drawer.draw_line(triangle[0], triangle[1]);
+        drawer.draw_line(triangle[1], triangle[2]);
+        drawer.draw_line(triangle[2], triangle[0]);
+    }
 }

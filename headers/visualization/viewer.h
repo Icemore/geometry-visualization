@@ -5,12 +5,14 @@
 
 #include "geom/primitives/point.h"
 #include "geom/primitives/segment.h"
+#include "geom/primitives/triangle.h"
 
 namespace visualization 
 {
 
     using geom::structures::point_type;
     using geom::structures::segment_type;
+    using geom::structures::triangle_type;
 
     struct stream_type
     {
@@ -38,6 +40,7 @@ namespace visualization
         virtual void draw_line  (segment_type const &,                   double width  = 1) = 0;
         virtual void draw_line  (point_type const &, point_type const &, double width  = 1) = 0;
         virtual void draw_point (point_type const &,                     uint8  radius = 1) = 0;
+        virtual void draw_filled_triangle(triangle_type const &)                            = 0;
 
         virtual ~drawer_type() {};
     };

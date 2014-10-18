@@ -14,6 +14,7 @@ struct drawer_impl : drawer_type
     void draw_line(segment_type const &, double width);
     void draw_line(point_type const &, point_type const &, double width);
     void draw_point(point_type const & pt, uint8 radius);
+    void draw_filled_triangle(triangle_type const & triangle);
 
     drawer_impl()
         : current_color_ (Qt::black)
@@ -35,8 +36,15 @@ struct drawer_impl : drawer_type
         double width;
     };
 
+    struct triangle_buffer_t
+    {
+        std::vector<GLint>      triangles;
+        std::vector<GLdouble>   colors;
+    };
+
     std::vector<point_buffer_t>     point_buffers;
     std::vector<segment_buffer_t>   segment_buffers;
+    std::vector<triangle_buffer_t>  triangle_buffers;
 
 private:
     QColor current_color_;
