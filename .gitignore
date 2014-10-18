@@ -2,3 +2,4 @@
 Makefile
 libvisualization.a
 bin
+.ycm_extra_conf.pyc
